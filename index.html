@@ -3,6 +3,53 @@
 
 <head>
     <title>User Profile</title>
+    <script src="https://form.jotform.com/static/feedback2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var JFL_232924255172051 = new JotformFeedback({
+            formId: '232924255172051',
+            base: 'https://form.jotform.com/',
+            windowTitle: 'Form',
+            backgroundColor: '#FFA500',
+            fontColor: '#FFFFFF',
+            type: 'false',
+            height: 500,
+            width: 700,
+            openOnLoad: false
+        });
+
+        var quizCompleted = false;  // A flag to track if the quiz is completed
+
+        // Function to display the test score
+        function displayTestScore(score) {
+            var tfiScoreElement = document.getElementById('tfiScore');
+            tfiScoreElement.innerText = 'Your TFI Score: ' + score;
+
+            // Remove the "Take the Quiz" button
+            var takeQuizButton = document.getElementById('takeQuiz');
+            takeQuizButton.style.display = 'none';
+        }
+
+        // Function to handle the completion of the quiz
+        function onQuizCompletion(score) {
+            displayTestScore(score);
+            quizCompleted = true;
+        }
+
+        // Add an event listener to open the quiz lightbox
+        document.getElementById('takeQuiz').addEventListener('click', function () {
+            // Display the quiz lightbox when the "Take the Quiz" button is clicked
+            JFL_232924255172051.open();
+        });
+
+        // Add an event listener for messages received from the quiz
+        window.addEventListener("message", function (e) {
+            var messageData = e.data;
+            if (messageData.type === 'quizCompletion' && !quizCompleted) {
+                // Handle quiz completion and display the score
+                onQuizCompletion(messageData.score);
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -15,30 +62,11 @@
         <button id="submitStory">Submit</button>
     </div>
 
-    <!-- TFI Score and Quiz -->
+    <!-- TFI Score -->
     <div class="tfi-score">
         <p>Your TFI Score: <span id="tfiScore">Not available</span></p>
         <button id="takeQuiz">Take the Quiz</button>
     </div>
-
-    <div class="quiz-lightbox" id="quizLightbox" style="display: none;">
-        <!-- JotForm quiz iframe here -->
-        <iframe src="your-jotform-embed-link" width="600" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-    </div>
-
-    <script>
-        // JavaScript to handle interactions
-        document.getElementById('submitStory').addEventListener('click', function () {
-            var tinnitusStory = document.getElementById('tinnitusStory').value;
-            // Handle submission of tinnitus story (e.g., send it to the server)
-            // You can add your logic here
-        });
-
-        document.getElementById('takeQuiz').addEventListener('click', function () {
-            // Display the quiz lightbox when the "Take the Quiz" button is clicked
-            document.getElementById('quizLightbox').style.display = 'block';
-        });
-    </script>
 </body>
 
 </html>
