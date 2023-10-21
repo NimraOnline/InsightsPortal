@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Profile</title>
+</head>
+
+<body>
+    <h1>Welcome, <span id="username">JohnDoe</span></h1>
+
+    <!-- Tinnitus Story -->
+    <div class="tinnitus-story">
+        <p>Share your tinnitus story</p>
+        <textarea id="tinnitusStory" rows="5" cols="40" placeholder="My tinnitus started when..."></textarea>
+        <button id="submitStory">Submit</button>
+    </div>
+
+    <!-- TFI Score and Quiz -->
+    <div class="tfi-score">
+        <p>Your TFI Score: <span id="tfiScore">Not available</span></p>
+        <button id="takeQuiz">Take the Quiz</button>
+    </div>
+
+    <div class="quiz-lightbox" id="quizLightbox" style="display: none;">
+        <!-- JotForm quiz iframe here -->
+        <iframe src="your-jotform-embed-link" width="600" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    </div>
+
+    <script>
+        // JavaScript to handle interactions
+        document.getElementById('submitStory').addEventListener('click', function () {
+            var tinnitusStory = document.getElementById('tinnitusStory').value;
+            // Handle submission of tinnitus story (e.g., send it to the server)
+            // You can add your logic here
+        });
+
+        document.getElementById('takeQuiz').addEventListener('click', function () {
+            // Display the quiz lightbox when the "Take the Quiz" button is clicked
+            document.getElementById('quizLightbox').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
